@@ -24,7 +24,7 @@ void method_bisection(METHOD_DATA *data, unsigned int pos, float (*function)(flo
     data->method_data[pos].final_precision = data->precision_wanted+1;
     data->method_data[pos].name = "Bisseccao";  //salva o nome do método
 
-    printf("\n\tExecutando o método da bissecação...\n");
+    printf("\n\tExecutando o método da bissecção...\n");
     
     //Requisição de dados ao usuário - intervalos
     printf("\nDigite o valor inicial do intervalo: ");
@@ -218,7 +218,7 @@ void comparative_table(METHOD_DATA *data, float (*function)(float),float (*d_fun
     printf("\n\n\t\t\t\tTABELA COMPARATIVA ENTRE OS MÉTODOS\n\n\n");
     //number_of_methods
     for(int pos =3; pos>=0; pos--){
-        printf("| Nome: %16s | Raiz: %f | Precisão: %f | Tempo (us): %8.2f | Iterações: %d|\n",
+        printf("| Nome: %16s | Raiz: %f | Precisão: %f | Tempo (us): %8.2f | Iterações: %5d|\n",
         data->method_data[pos].name,data->method_data[pos].root, data->method_data[pos].final_precision,
         data->method_data[pos].time, data->method_data[pos].iterations);
     };
