@@ -14,8 +14,9 @@
 #include <sys\timeb.h>
 #include <stdlib.h> 
 #include <windows.h>
+#include <math.h>
 
-//Estrutura para armazenar os dados de específicos de cada método
+//Estrutura para armazenar os dados específicos de cada método
 #define number_of_methods 4
 typedef struct METHOD{
     float root;
@@ -39,6 +40,6 @@ void method_false_position(METHOD_DATA *method_data, unsigned int pos, float (*f
 void method_newton_raphson(METHOD_DATA *method_data, unsigned int pos, float (*function)(float),float (*d_function)(float));
 void method_secant(METHOD_DATA *method_data, unsigned int pos, float (*function)(float));
 void initial_input(METHOD_DATA *method_data);
-void comparative_table(METHOD_DATA *method_data,float (*function)(float),float (*d_function)(float)); //chama todas as funções e monta a tabela
+void comparative_table(METHOD_DATA *method_data,float (*function)(float),float (*d_function)(float)); //Chama todas as funções e monta a tabela
 
 #endif

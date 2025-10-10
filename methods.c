@@ -1,7 +1,5 @@
-//Inclusão de biblioteca necessárias
 
 #include "methods.h"
-#include <math.h>
 
 //Variáveis para cálculo de tempo
 LARGE_INTEGER freq, start, end;
@@ -34,7 +32,6 @@ void method_bisection(METHOD_DATA *data, unsigned int pos, float (*function)(flo
     
     unsigned int k = 0;
 
-    //tempo
     // Frequência do contador de alta resolução
     QueryPerformanceFrequency(&freq);
 
@@ -50,7 +47,7 @@ void method_bisection(METHOD_DATA *data, unsigned int pos, float (*function)(flo
             a_temp = root_temp;
         
         data->method_data[pos].final_precision = fabs(function(root_temp)); //Atualiza a precisão
-        //time(&final_time);
+        data->method_data[pos].iterations = k;                              //Salva o número de iterações
     };
 
     // Marca o tempo final
@@ -58,8 +55,6 @@ void method_bisection(METHOD_DATA *data, unsigned int pos, float (*function)(flo
 
     // Tempo em nanosegundos
     elapsed_ns = (double)(end.QuadPart - start.QuadPart) * 1e9 / (double)freq.QuadPart;
-
-    data->method_data[pos].iterations = k;          //Salva o número de iterações
     
     data->method_data[pos].time = elapsed_ns/1000; //Salva o tempo em microsegundos
     data->method_data[pos].root = root_temp;       //Salva a raiz encontrada
@@ -73,7 +68,7 @@ void method_fake_position(METHOD_DATA *data, unsigned int pos, float (*function)
     
     printf("\n\tExecutando o método da Falsa Posição...\n");
     
-    //requisição de dados ao usuário
+    //Requisição de dados ao usuário
     printf("\nDigite o valor inicial do intervalo: ");
     scanf("%f", &a_temp);
     printf("\nDigite o valor final do intervalo: ");
@@ -99,7 +94,6 @@ void method_fake_position(METHOD_DATA *data, unsigned int pos, float (*function)
         data->method_data[pos].iterations = k;
     };
     
-
     // Marca o tempo final
     QueryPerformanceCounter(&end);
 
@@ -125,10 +119,8 @@ void method_newton_raphson(METHOD_DATA *data, unsigned int pos, float (*function
     printf("\nDigite o valor inicial: ");
     scanf("%f", &root_temp);
 
-    //cálculos do método
     unsigned int k = 0;
     
-    //tempo
     // Frequência do contador de alta resolução
     QueryPerformanceFrequency(&freq);
 
@@ -142,15 +134,14 @@ void method_newton_raphson(METHOD_DATA *data, unsigned int pos, float (*function
         data->method_data[pos].final_precision = fabs(function(root_temp));
         data->method_data[pos].iterations = k;
     };
+
     // Marca o tempo final
     QueryPerformanceCounter(&end);
 
     // Tempo em nanosegundos
     elapsed_ns = (double)(end.QuadPart - start.QuadPart) * 1e9 / (double)freq.QuadPart;
 
-    //printf("\nGastou aproximadamente %.0f ns\n", elapsed_ns);
-
-    data->method_data[pos].time = elapsed_ns/1000; //Salva o tempo em microsegundos
+    data->method_data[pos].time = elapsed_ns/1000;  //Salva o tempo em microsegundos
     
     data->method_data[pos].root = root_temp;
 
@@ -172,10 +163,9 @@ void method_secant(METHOD_DATA *data, unsigned int pos, float (*function)(float)
     
     
     unsigned int k = 0;
-    //tempo
+    
     // Frequência do contador de alta resolução
     QueryPerformanceFrequency(&freq);
-
     // Marca o tempo inicial
     QueryPerformanceCounter(&start);
 
@@ -189,15 +179,14 @@ void method_secant(METHOD_DATA *data, unsigned int pos, float (*function)(float)
         data->method_data[pos].final_precision = fabs(function(root_temp));
         data->method_data[pos].iterations = k;
     };
+    
    // Marca o tempo final
     QueryPerformanceCounter(&end);
 
     // Tempo em nanosegundos
     elapsed_ns = (double)(end.QuadPart - start.QuadPart) * 1e9 / (double)freq.QuadPart;
     
-    //printf("\nGastou aproximadamente %.0f ns\n", elapsed_ns);
-    
-    data->method_data[pos].time = elapsed_ns/1000; //Salva o tempo em microsegundos
+    data->method_data[pos].time = elapsed_ns/1000;  //Salva o tempo em microsegundos
     data->method_data[pos].root = root_temp;
    
     return;
@@ -206,8 +195,8 @@ void method_secant(METHOD_DATA *data, unsigned int pos, float (*function)(float)
 
 void comparative_table(METHOD_DATA *data, float (*function)(float),float (*d_function)(float)){
     LIMPA_TELA;
-    method_bisection(data,0, function);
-    LIMPA_TELA; //limpar tela após cada método
+    method_bisection(data,0, function);         //Chama o método e informa a posição
+    LIMPA_TELA;                                 //Limpa a tela após cada método
     method_fake_position(data,1,function);
     LIMPA_TELA;
     method_secant(data,3,function);
@@ -215,9 +204,9 @@ void comparative_table(METHOD_DATA *data, float (*function)(float),float (*d_fun
     method_newton_raphson(data,2,function,d_function);
     LIMPA_TELA;
 
-    printf("\n\n\t\t\t\tTABELA COMPARATIVA ENTRE OS MÉTODOS\n\n\n");
-    //number_of_methods
-    for(int pos =3; pos>=0; pos--){
+    printf("\n\n\t\t\t\tTABELA COMPARATIVA ENTRE OS MÉTODOS\n\n\n");    //Imprime uma tabela com os dados de todos os métodos
+   
+    for(int pos =3; pos>=0; pos--){                                     //Percorre o vetor de métodos
         printf("| Nome: %16s | Raiz: %f | Precisão: %f | Tempo (us): %8.2f | Iterações: %5d|\n",
         data->method_data[pos].name,data->method_data[pos].root, data->method_data[pos].final_precision,
         data->method_data[pos].time, data->method_data[pos].iterations);
