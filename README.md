@@ -29,7 +29,7 @@ float d_problem_2(float x){                              //função derivada
     return root;
 };
 ```
-Em seguida, adiciona-se um item ao menu ou sobrecreve um existente e passa o ponteiro da novas funções como parâmetro da comparative_table():
+Em seguida, adiciona-se um item ao menu ou sobrecreve um existente e passa os ponteiros da novas funções como parâmetro da comparative_table():
 ```bash
 if(menu_option==1){
   comparative_table(&method_data, problem_1, d_problem_1);        //Executa os métodos e monta a tabela
