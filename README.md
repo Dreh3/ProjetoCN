@@ -9,7 +9,7 @@ Andressa Sousa Fonseca
 ## Detalhamento do Projeto
 O programa desenvolvido permite ao usuário escolher entre dois problemas de engenharia, um sobre campo magnético e outro sobre concentração de bactérias. Em ambos os casos, o programa executa 4 métodos diferentes para encontrar as raízes da função, são eles Bissecção, Falsa Posição, Secante e Newton-Raphson. Após a escolha do problema, o usuário pode informar os parâmetros necessários para o cálculo de cada método.
 
-__Os paraâmetros de entrada de cada método:__
+__Os parâmetros de entrada de cada método:__
 1) Bissecção: valor inicial e final do intervalo.
 2) Falsa Posição: valor inicial e final do intervalo
 4) Newton-Raphson: uma estimativa inicial.
@@ -18,7 +18,7 @@ __Os paraâmetros de entrada de cada método:__
 Ao final da execução dos métodos, o programa exibe uma tabela comparativa com os seguintes dados: raiz encontrada, precisão alcançada, número de iterações e o tempo total. Assim, é possível identificar qual método foi mais eficiente ou mais rápido.
 
 ## Adaptação para outras funções
-A adição de novas funções é bastante simples, basta incluir duas novas funções, uma que retorna o valor de y para a função original do problema e outra que retorna o valor de y para a função correspondente à primeira derivada do problema.
+A adição de novas equações é bastante simples, basta incluir duas novas funções, uma que retorna o valor de y para a função original do problema e outra que retorna o valor de y para a função correspondente à primeira derivada do problema.
 ```bash
 float problem_2(float x){                                //função original
     float root = 80*exp((-2*x)) + 20*(exp(-0.1*x)) - 10; 
