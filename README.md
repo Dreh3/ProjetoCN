@@ -1,7 +1,7 @@
 # Comparador de Métodos para Resolução de Equações Algébricas e Transcendentes
 
 __Programa que implementa métodos para encontrar raízes de funções__<br>
-Repositório foi criado com o intuito de desenvolver um projeto prático sobre os métodos estudados na Unidade 1 da disciplina de Cálculo Numérico menistrada na Universidade do Vale do São Francisco - UNIVASF.
+Repositório foi criado com o intuito de desenvolver um projeto prático sobre os métodos estudados na Unidade 1 da disciplina de Cálculo Numérico ministrada na Universidade do Vale do São Francisco - UNIVASF.
 
 __Responsável pelo desenvolvimento:__
 Andressa Sousa Fonseca
